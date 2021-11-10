@@ -2,8 +2,19 @@ import React, { useState } from 'react';
 import Todo from './todo';
 import TodoForm from './todoForm';
 
+//get the data from localstorage
+const getLocalItems = ()=>{
+    let list = localStorage.getItem('todos');
+    if(list){
+        return JSON.parse(localStorage.getItem('todos'));
+    }
+    else{
+        return [];
+    }
+}
+
 function TodoList() {
-    const [todos, setTodos] = useState([]);
+    const [todos, setTodos] = useState(getLocalItems());
 
     const addTodo = todo => {
         if (!todo.text || /^\s*$/.test(todo.text)) {

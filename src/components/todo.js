@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TodoForm from './todoForm';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
+
+
 
 function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
     const [edit, setEdit] = useState({
         id: null,
         value: ''
     })
+    
+    //add todos to local storage
+    useEffect(()=>{
+        localStorage.setItem('todos',JSON.stringify(todos))
+    }, [todos])
 
     //edit function
     const submitUpdate = value => {
